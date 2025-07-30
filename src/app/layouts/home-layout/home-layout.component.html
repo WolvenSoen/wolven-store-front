@@ -1,10 +1,11 @@
 <nav class="w-full bg-black h-16 flex items-center px-6 shadow-md">
     <div class="inline-block p-1 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-900">
         <h1 class="text-xl rounded-full bg-black px-5 py-2">
-            <span class="text-yellow-100">Wolven</span><span class="text-white">Store</span>
+            <span class="text-yellow-100">Wolven</span><span class="text-white">Hut</span>
         </h1>
     </div>
 </nav>
+
 <section class="w-full min-h-[80vh] md:min-h-[95vh] max-h-screen relative overflow-hidden shadow-lg">
     <!-- Imagen de fondo -->
     <img src="/hero.jpg" alt="Arte y Cultura" class="absolute inset-0 w-full h-full object-cover z-0" />
@@ -16,7 +17,54 @@
             Gear up for adventure!
         </h1>
         <p class="text-lg text-gray-200 mb-6 max-w-lg">
-            Everything you need for your next expedition: tents, backpacks, sleeping bags, lanterns, and more. Experience nature with the best camping gear.
+            Everything you need for your next expedition: tents, backpacks, sleeping bags, lanterns, and more.
+            Experience nature with the best camping gear.
         </p>
     </div>
 </section>
+
+<section class="w-full max-w-7xl mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div *ngFor="let product of products"
+            class="cursor-pointer group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative flex flex-col min-h-[420px]">
+            <!-- Image container above -->
+            <div class="w-full flex-1 min-h-[320px] bg-gray-100 border-b border-gray-200 overflow-hidden relative flex">
+                <img [src]="'https://www.shokuninusa.com/cdn/shop/files/gravity-damascus-gut-hook-hunting-knife-with-exotic-rose-wood-and-bone-handle-498317_98326012-37a7-4ab5-ae07-426b32503736.jpg?v=1711955419'" alt="{{ product.name }}" class="object-cover w-full h-full transition duration-300 group-hover:blur-sm group-hover:brightness-50 flex-1" />
+                <div class="absolute inset-0 flex flex-col justify-center items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition">{{ product.name }}</h3>
+                    <p class="text-gray-200 mb-2 text-center">{{ product.description }}</p>
+                    <div class="flex flex-wrap gap-2 text-xs text-gray-200 mb-2 justify-center">
+                        <span>Height: {{ product.height }}cm</span>
+                        <span>Width: {{ product.width }}cm</span>
+                        <span>Length: {{ product.length }}cm</span>
+                    </div>
+                    <span class="text-2xl font-bold text-yellow-400 mb-2">{{ product.price | currency }}</span>
+                    <button class="mt-2 py-2 px-4 rounded bg-yellow-700 hover:bg-yellow-800 text-white font-semibold shadow transition">Add to Cart</button>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-yellow-50 opacity-0 group-hover:opacity-10 transition pointer-events-none"></div>
+        </div>
+    </div>
+</section>
+
+
+
+<footer class="w-full bg-black text-gray-200 py-8 px-4 mt-0 border-t border-yellow-900">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:justify-between gap-4">
+        <div class="flex items-center gap-2 mb-4 md:mb-0">
+            <div class="inline-block p-1 rounded-full bg-gradient-to-r from-yellow-400 via-yellow-700 to-yellow-900">
+                <span
+                    class="text-lg rounded-full bg-black px-4 py-1 font-bold tracking-wide text-yellow-100">Wolven<span
+                        class="text-white">Hut</span></span>
+            </div>
+            <span class="ml-3 text-sm text-gray-400"> {{ currentYear }} WolvenHut. All rights reserved.</span>
+        </div>
+        <div class="flex gap-6 text-sm">
+            <a href="#" class="hover:text-yellow-400 transition">About</a>
+            <a href="#" class="hover:text-yellow-400 transition">Contact</a>
+            <a href="#" class="hover:text-yellow-400 transition">Terms</a>
+            <a href="#" class="hover:text-yellow-400 transition">Privacy</a>
+        </div>
+    </div>
+</footer>
