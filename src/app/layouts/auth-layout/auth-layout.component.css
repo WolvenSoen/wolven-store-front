@@ -1,0 +1,41 @@
+/* Auth Layout Styles */
+.auth-page-container {
+  background-color: #f3f4f6; /* Default background color (light mode) */
+}
+
+/* Background image with overlay */
+.auth-background {
+  background-image: url("/auth-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.30;
+}
+
+/* Card styling */
+.auth-card {
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .auth-content-wrapper {
+    padding: 1rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .auth-page-container {
+    background-color: rgb(0, 0, 0)
+    ;
+  }
+
+  .auth-background::after {
+    background: linear-gradient(
+      135deg,
+      rgba(55, 48, 163, 0.9) 0%,
+      rgba(6, 95, 70, 0.8) 100%
+    );
+  }
+}
