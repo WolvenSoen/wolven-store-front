@@ -1,0 +1,213 @@
+<div class="max-w-2xl mx-auto mt-10 p-8 bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900 rounded-2xl shadow-2xl border border-zinc-700 mb-20">
+    <!-- Stepper Header -->
+    <div class="flex justify-between mb-8">
+        <div class="flex-1 text-center transition-all duration-200" [ngClass]="step === 1 ? 'font-bold text-amber-100 scale-110' : 'text-zinc-400'">1. Datos de envío</div>
+        <div class="flex-1 text-center transition-all duration-200" [ngClass]="step === 2 ? 'font-bold text-amber-100 scale-110' : 'text-zinc-400'">2. Cotización</div>
+        <div class="flex-1 text-center transition-all duration-200" [ngClass]="step === 3 ? 'font-bold text-amber-100 scale-110' : 'text-zinc-400'">3. Confirmación</div>
+    </div>
+
+    <!-- Step 1: Formulario -->
+    <form *ngIf="step === 1" [formGroup]="destinationForm" (ngSubmit)="nextStep()">
+        <!-- Datos personales -->
+        <div class="mb-8">
+            <h3 class="text-amber-100 text-lg font-bold mb-4">Datos personales</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-amber-100 font-semibold">Nombre completo</label>
+                    <input formControlName="name" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Juan Pérez" />
+                    <div *ngIf="submitted && f['name'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Empresa (opcional)</label>
+                    <input formControlName="company" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Wolven Store" />
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Correo electrónico</label>
+                    <input formControlName="email" type="email" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: correo@ejemplo.com" />
+                    <div *ngIf="submitted && f['email'].errors" class="text-red-400 text-xs mt-1">{{ f['email'].errors['required'] ? 'Este campo es requerido' : 'Email inválido' }}</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Teléfono</label>
+                    <input formControlName="phone" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: 5551234567" />
+                    <div *ngIf="submitted && f['phone'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+            </div>
+        </div>
+        <!-- Dirección de envío -->
+        <div>
+            <h3 class="text-amber-100 text-lg font-bold mb-4">Dirección de envío</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-amber-100 font-semibold">Calle</label>
+                    <input formControlName="street" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Av. Insurgentes Sur" />
+                    <div *ngIf="submitted && f['street'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Número</label>
+                    <input formControlName="number" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: 123" />
+                    <div *ngIf="submitted && f['number'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Colonia</label>
+                    <input formControlName="district" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Del Valle" />
+                    <div *ngIf="submitted && f['district'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Ciudad</label>
+                    <input formControlName="city" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Ciudad de México" />
+                    <div *ngIf="submitted && f['city'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Estado</label>
+                    <input formControlName="state" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: CDMX" />
+                    <div *ngIf="submitted && f['state'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">País</label>
+                    <input formControlName="country" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: México" />
+                    <div *ngIf="submitted && f['country'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Código Postal</label>
+                    <input formControlName="postalCode" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: 03100" />
+                    <div *ngIf="submitted && f['postalCode'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+                <div>
+                    <label class="block text-amber-100 font-semibold">Referencia</label>
+                    <input formControlName="reference" class="w-full border border-zinc-700 bg-zinc-900 text-amber-100 rounded px-3 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-amber-200 placeholder-zinc-500" placeholder="Ej: Entre calles X y Y, cerca del parque" />
+                    <div *ngIf="submitted && f['reference'].errors" class="text-red-400 text-xs mt-1">Este campo es requerido</div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-end mt-8">
+            <button type="submit" class="bg-amber-100 text-zinc-900 font-bold px-8 py-2 rounded-lg shadow hover:bg-amber-200 transition-all">Siguiente</button>
+        </div>
+    </form>
+
+    <!-- Step 2: Cotización -->
+    <div *ngIf="step === 2">
+        <div *ngIf="loading" class="flex flex-col items-center justify-center py-16">
+            <span class="mb-4 inline-block h-10 w-10 animate-spin rounded-full border-4 border-solid border-amber-100 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></span>
+            <div class="text-amber-100 text-lg font-semibold">Obteniendo cotizaciónes...</div>
+        </div>
+        <div *ngIf="!loading">
+        <div *ngIf="errorMessage" class="mb-6">
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Error: </strong>
+                <span class="block sm:inline">{{ errorMessage }}</span>
+            </div>
+        </div>
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold mb-4 text-amber-100">Cotización de Envío</h2>
+            <!-- Card de dirección y productos -->
+            <div class="mb-8">
+                <div class="bg-zinc-800 border border-zinc-700 rounded-xl p-5 shadow flex flex-col md:flex-row gap-6">
+                    <!-- Dirección -->
+                    <div class="flex-1 min-w-[220px]">
+                        <div class="text-amber-100 font-bold text-lg mb-2 flex items-center gap-2">
+                            <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 text-amber-100 inline' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z' /><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M15 11a3 3 0 11-6 0 3 3 0 016 0z' /></svg>
+                            Dirección de envío
+                        </div>
+                        <div class="text-amber-100/90 text-sm leading-relaxed">
+                            <div><span class="font-semibold">Nombre:</span> {{ destinationForm.value.name }}</div>
+                            <div *ngIf="destinationForm.value.company"><span class="font-semibold">Empresa:</span> {{ destinationForm.value.company }}</div>
+                            <div><span class="font-semibold">Tel:</span> {{ destinationForm.value.phone }}</div>
+                            <div><span class="font-semibold">Email:</span> {{ destinationForm.value.email }}</div>
+                            <div class="mt-2"><span class="font-semibold">Dirección:</span> {{ destinationForm.value.street }} #{{ destinationForm.value.number }}, {{ destinationForm.value.district }}, {{ destinationForm.value.city }}, {{ destinationForm.value.state }}, {{ destinationForm.value.country }}, CP {{ destinationForm.value.postalCode }}</div>
+                            <div *ngIf="destinationForm.value.reference"><span class="font-semibold">Referencia:</span> {{ destinationForm.value.reference }}</div>
+                        </div>
+                    </div>
+                    <!-- Productos del carrito -->
+                    <div class="flex-1 min-w-[220px]">
+                        <div class="text-amber-100 font-bold text-lg mb-2 flex items-center gap-2">
+                            <svg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5 text-amber-100 inline' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m13-9l2 9m-5-9V6a2 2 0 10-4 0v3' /></svg>
+                            Productos en carrito
+                        </div>
+                        <div *ngIf="cartProducts.length; else emptyCart" class="text-amber-100/90 text-sm">
+                            <ul>
+                                <li *ngFor="let prod of cartProducts" class="flex justify-between items-center border-b border-zinc-700 py-1 last:border-b-0">
+                                    <span>{{ prod.name }} <span class="text-xs text-zinc-400">x{{ prod.quantity }}</span></span>
+                                    <span class="font-semibold">${{ prod.price * prod.quantity }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <ng-template #emptyCart>
+                            <div class="text-zinc-400 italic">No hay productos en el carrito.</div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="(quotations?.length || 0) > 0" class="mb-8">
+                <h3 class="text-lg font-bold text-amber-100 mb-2">Selecciona una opción de envío:</h3>
+                <div *ngFor="let quote of quotations; let i = index" class="cursor-pointer border border-zinc-700 rounded-lg p-4 mb-3 flex items-center gap-4"
+                    [ngClass]="selectedQuotationIndex === i ? 'bg-amber-100/10 border-amber-100' : 'bg-zinc-800'"
+                    (click)="selectedQuotation = quote; selectedQuotationIndex = i">
+                    <input type="radio" name="quotation" [value]="i" [(ngModel)]="selectedQuotationIndex" class="accent-amber-100" (click)="$event.stopPropagation()" />
+                    <div class="flex-1">
+                        <div class="flex flex-wrap gap-4 text-amber-100 text-sm">
+                            <div><span class="font-semibold">Paquetería:</span> {{ quote.carrierDescription }}</div>
+                            <div><span class="font-semibold">Servicio:</span> {{ quote.serviceDescription }}</div>
+                            <div><span class="font-semibold">Entrega estimada:</span> {{ quote.deliveryEstimate }}</div>
+                            <div><span class="font-semibold">Precio base:</span> ${{ quote.basePrice }} {{ quote.currency }}</div>
+                            <div><span class="font-semibold">Seguro:</span> ${{ quote.insurance }} {{ quote.currency }}</div>
+                            <div><span class="font-semibold">Impuestos:</span> ${{ quote.taxes }} {{ quote.currency }}</div>
+                        </div>
+                        <div class="mt-4 flex items-center">
+                            <span class="font-semibold text-amber-100 mr-2">Total:</span>
+                            <span class="text-amber-100 bg-amber-800 px-3 py-1 rounded font-bold text-lg">${{ quote.totalPrice }} {{ quote.currency }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-between mt-8">
+            <button (click)="prevStep()" class="bg-zinc-700 text-amber-100 font-bold px-8 py-2 rounded-lg shadow hover:bg-zinc-600 transition-all">Anterior</button>
+            <button (click)="nextStep()" class="bg-amber-100 text-zinc-900 font-bold px-8 py-2 rounded-lg shadow hover:bg-amber-200 transition-all">Siguiente</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- Step 3: Confirmación (con spinner de carga si loading) -->
+    <div *ngIf="step === 3">
+        <div *ngIf="loading" class="flex flex-col items-center justify-center py-16">
+            <span class="mb-4 inline-block h-10 w-10 animate-spin rounded-full border-4 border-solid border-amber-100 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]" role="status"></span>
+            <div class="text-amber-100 text-lg font-semibold">Confirmando envío</div>
+        </div>
+        <div *ngIf="!loading">
+            <div *ngIf="shipment; else noShipment" class="max-w-xl mx-auto bg-zinc-800 border border-zinc-700 rounded-xl p-8 shadow text-amber-100">
+                <h2 class="text-2xl font-bold mb-6 text-center">¡Envío confirmado!</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <span class="font-semibold">Paquetería: </span>
+                        <span>{{ shipment.carrier  | uppercase}}</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Servicio: </span>
+                        <span>{{ shipment.service }}</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Tracking Number: </span>
+                        <span>{{ shipment.trackingNumber }}</span>
+                    </div>
+                    <div>
+                        <span class="font-semibold">Rastreo: </span>
+                        <a *ngIf="shipment.trackUrl" [href]="shipment.trackUrl" target="_blank" class="text-amber-200 underline hover:text-amber-300">Ver seguimiento</a>
+                        <span *ngIf="!shipment.trackUrl" class="text-zinc-400">No disponible</span>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <span class="font-semibold">Etiqueta: </span>
+                    <a *ngIf="shipment.label" [href]="shipment.label" target="_blank" class="ml-2 text-amber-200 underline hover:text-amber-300">Descargar PDF</a>
+                    <span *ngIf="!shipment.label" class="ml-2 text-zinc-400">No disponible</span>
+                </div>
+                <div class="flex justify-between mt-8">
+                    <button (click)="prevStep()" class="bg-zinc-700 text-amber-100 font-bold px-8 py-2 rounded-lg shadow hover:bg-zinc-600 transition-all">Anterior</button>
+                    <button disabled class="bg-amber-200 text-zinc-400 font-bold px-8 py-2 rounded-lg cursor-not-allowed">Finalizar</button>
+                </div>
+            </div>
+            <ng-template #noShipment>
+                <div class="h-32 flex items-center justify-center text-zinc-500">No se pudo generar el envío.</div>
+            </ng-template>
+        </div>
+    </div>
+</div>

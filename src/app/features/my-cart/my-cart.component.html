@@ -1,0 +1,43 @@
+<section class="max-w-1mx-auto py-10 px-4 bg-black rounded-lg shadow-lg m-10">
+    <h2 class="text-3xl font-bold text-amber-50 mb-8 text-center">My Cart</h2>
+    <div class="bg-gray-50 rounded-xl shadow-lg overflow-hidden border border-gray-200 m-3">
+        <ng-container *ngIf="cartItems && cartItems.length > 0; else emptyCart">
+            <ul>
+                <li *ngFor="let item of cartItems" class="flex items-center gap-4 px-6 py-4 border-b last:border-b-0">
+                    <div class="w-20 h-20 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden">
+                        <img [src]="item.photoUrl" alt="{{ item.name }}" class="object-cover w-full h-full" />
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
+                        <p class="text-gray-500 text-sm">{{ item.description }}</p>
+                    </div>
+                    <div class="flex flex-col items-end gap-2">
+                        <span class="text-yellow-800 font-bold text-lg">${{ item.price }}</span>
+                        <div class="flex items-center gap-2">
+                            <button class="w-7 h-7 rounded bg-gray-200 text-gray-700 font-bold" (click)="addOrSubstractCartItemQuantity(item, 'subtract')">-</button>
+                            <span class="px-2 text-black">{{ item.quantity }}</span>
+                            <button class="w-7 h-7 rounded bg-gray-200 text-gray-700 font-bold" (click)="addOrSubstractCartItemQuantity(item, 'add')">+</button>
+                        </div>
+                        <button class="text-xs text-red-600 hover:underline mt-1" (click)="removeFromCart(item)">Remove</button>
+                    </div>
+                </li>
+            </ul>
+            <div class="flex justify-between items-center px-6 py-4 bg-gray-50 border-t">
+                <span class="font-semibold text-gray-700">Total</span>
+                <span class="text-2xl font-bold text-yellow-800">${{ totalPayment.toFixed(2) }}</span>
+            </div>
+            <div class="px-6 py-4 bg-gray-50 flex justify-end">
+                <button
+                    [routerLink]="['/buy-wizzard']"
+                    class="bg-yellow-700 hover:bg-yellow-800 text-white font-semibold px-6 py-3 rounded shadow transition">Checkout
+                </button>
+            </div>
+        </ng-container>
+        <ng-template #emptyCart>
+            <div class="flex flex-col items-center justify-center py-16 bg-gray-950">
+                <span class="text-5xl mb-4">🛒</span>
+                <p class="text-gray-500 text-lg">Your cart is empty.</p>
+            </div>
+        </ng-template>
+    </div>
+</section>

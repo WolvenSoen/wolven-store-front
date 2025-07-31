@@ -11,33 +11,14 @@ import { Product } from '../../core/interfaces/product.interface';
   styleUrl: './home-layout.component.css'
 })
 export class HomeLayoutComponent {
-  currentYear = new Date().getFullYear();
-  products: Product[] = [];
-
-  showDialog = false;
-  selectedProduct: Product | null = null;
-
-  constructor(private productsService: ProductsService) {}
-
-  ngOnInit() {
-    this.productsService.getProducts().subscribe({
-      next: (products: any) => {
-        this.products = products;
-        console.log(this.products);
-      },
-      error: (error) => {
-        console.error('Error fetching products:', error);
-      }
-    });
-  }
-
-  openProductDialog(product: Product) {
-    this.selectedProduct = product;
-    this.showDialog = true;
-  }
-
-  closeProductDialog() {
-    this.showDialog = false;
-    this.selectedProduct = null;
+  get cartCount(): number {
+    const cartItems = localStorage.getItem('cartItems');
+    if (!cartItems) return 0;
+    try {
+      // Sum all quantities for a more accurate badge
+      return JSON.parse(cartItems).reduce((sum: number, item: any) => sum + (item.quantity || 1), 0);
+    } catch {
+      return 0;
+    }
   }
 }

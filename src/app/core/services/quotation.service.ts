@@ -11,20 +11,21 @@ export class QuotationService {
   constructor(private http: HttpClient) { }
 
   startQuotation(body: any){
-    const token = localStorage.getItem('token');
+    const token = 'c2ef38e8a14f67f5e4185db1b9b4c05b61c8b558eea0000bc6b1c8ca233d6fba';
     const headers = new HttpHeaders({
+      // 'Authorization': `Bearer ${token}`,
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post(`${environment.BASE_URL}ship/rate/`, body, { headers });
+    return this.http.post(`${environment.ENVIA_URL}ship/rate/`, body, { headers });
   }
 
-  generateQuotation(body: any) {
-    const token = localStorage.getItem('token');
+  generateShipment(body: any) {
+    const token = 'c2ef38e8a14f67f5e4185db1b9b4c05b61c8b558eea0000bc6b1c8ca233d6fba';
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     });
-    return this.http.post(`${environment.BASE_URL}ship/generate/`, body, { headers });
+    return this.http.post(`${environment.ENVIA_URL}ship/generate/`, body, { headers });
   }
 }
