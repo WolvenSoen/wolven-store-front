@@ -13,14 +13,19 @@ import {
 } from '../../core/interfaces/quotation.interface';
 import { CommonModule } from '@angular/common';
 import { QuotationService } from '../../core/services/quotation.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-buy-wizzard',
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule],
   templateUrl: './buy-wizzard.component.html',
   styleUrls: ['./buy-wizzard.component.css'],
 })
 export class BuyWizzardComponent {
+  clearCart() {
+    localStorage.removeItem('cartItems');
+    this.cartProducts = [];
+  }
   cartProducts: any[] = [];
   step = 1;
   loading = false;
@@ -56,7 +61,7 @@ export class BuyWizzardComponent {
       reference: ['Entre calles A y B, cerca del zócalo', Validators.required],
     });
 
-    // Obtener productos del carrito desde localStorage
+    // Get products from localStorage
     const storedCart = localStorage.getItem('cartItems');
     if (storedCart) {
       try {

@@ -202,7 +202,7 @@
                 </div>
                 <div class="flex justify-between mt-8">
                     <button (click)="prevStep()" class="bg-zinc-700 text-amber-100 font-bold px-8 py-2 rounded-lg shadow hover:bg-zinc-600 transition-all">Anterior</button>
-                    <button disabled class="bg-amber-200 text-zinc-400 font-bold px-8 py-2 rounded-lg cursor-not-allowed">Finalizar</button>
+                    <button (click)="clearCart(); $event.preventDefault(); $event.stopPropagation();" [routerLink]="['/home']"  class="bg-amber-200 text-black font-bold px-8 py-2 rounded-lg">Volver al inicio</button>
                 </div>
             </div>
             <ng-template #noShipment>

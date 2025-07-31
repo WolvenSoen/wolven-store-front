@@ -39,8 +39,4 @@ export class MyCartComponent {
       localStorage.setItem('cartItems', JSON.stringify(this.cartItems));
     }
   }
-
-  checkout() {
-
-  }
 }
