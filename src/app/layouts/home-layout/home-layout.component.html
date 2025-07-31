@@ -23,7 +23,7 @@
     </div>
 </section>
 
-<section class="w-full max-w-7xl mx-auto px-4 py-12">
+<section class="w-full mx-auto px-4 py-12 bg-amber-50">
     <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Products</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <div *ngFor="let product of products"
@@ -32,7 +32,7 @@
             <div class="w-full flex-1 min-h-[320px] bg-gray-100 border-b border-gray-200 overflow-hidden relative flex">
                 <img [src]="'https://www.shokuninusa.com/cdn/shop/files/gravity-damascus-gut-hook-hunting-knife-with-exotic-rose-wood-and-bone-handle-498317_98326012-37a7-4ab5-ae07-426b32503736.jpg?v=1711955419'" alt="{{ product.name }}" class="object-cover w-full h-full transition duration-300 group-hover:blur-sm group-hover:brightness-50 flex-1" />
                 <div class="absolute inset-0 flex flex-col justify-center items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition">{{ product.name }}</h3>
+                    <h3 class="text-3xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition">{{ product.name }}</h3>
                     <p class="text-gray-200 mb-2 text-center">{{ product.description }}</p>
                     <div class="flex flex-wrap gap-2 text-xs text-gray-200 mb-2 justify-center">
                         <span>Height: {{ product.height }}cm</span>
