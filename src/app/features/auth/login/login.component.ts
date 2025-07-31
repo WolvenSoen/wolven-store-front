@@ -27,10 +27,13 @@ export class LoginComponent {
   login() {
     this.isLoading = true;
     this.authService.login(this.email, this.password).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         // Handle successful login
         this.router.navigate(['/home']);
         localStorage.setItem('userData', JSON.stringify(response));
+        const token = response.token;
+        localStorage.setItem('token-envia', token);
+
       },
       error: (error) => {
         // Handle login error
