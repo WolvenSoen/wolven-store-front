@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,17 +20,28 @@ export class LoginComponent {
 
   errorMessage: string | null = null;
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
   login() {
     this.isLoading = true;
-    setTimeout(() => {
-      this.isLoading = false;
-      // Mock redirect to home
-      window.location.href = '/home';
-    }, 1000);
+    this.authService.login(this.email, this.password).subscribe({
+      next: (response) => {
+        // Handle successful login
+        this.router.navigate(['/home']);
+        localStorage.setItem('userData', JSON.stringify(response));
+      },
+      error: (error) => {
+        // Handle login error
+        this.errorMessage = 'Invalid email or password';
+        this.isLoading = false;
+        console.error('Login error:', error);
+      },
+      complete: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
   togglePasswordVisibility() {

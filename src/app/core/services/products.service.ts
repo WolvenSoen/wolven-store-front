@@ -10,6 +10,7 @@ export class ProductsService {
   constructor(private http: HttpClient) {}
 
   getProducts() {
-    return this.http.get(`${environment.BASE_URL}products`);
+    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+    return this.http.get(`${environment.BASE_URL}products`, { headers });
   }
 }
