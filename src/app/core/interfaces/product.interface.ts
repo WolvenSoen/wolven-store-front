@@ -5,4 +5,5 @@ export interface Product {
   length: Number;
   price: any;
   width: Number;
+  photoUrl?: String;
 }

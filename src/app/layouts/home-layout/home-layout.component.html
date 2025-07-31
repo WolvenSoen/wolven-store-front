@@ -23,15 +23,20 @@
     </div>
 </section>
 
-<section class="w-full mx-auto px-4 py-12 bg-amber-50">
-    <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Featured Products</h2>
+<section class="w-full mx-auto px-4 py-12 bg-black">
+    <h2 class="text-3xl font-bold text-amber-50 mb-2 text-center">Featured Products</h2>
+    <p class="text-gray-200 mb-8 text-center">
+        Discover our handpicked selection of top-quality camping gear, designed to enhance your outdoor experience.
+    </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <div *ngFor="let product of products"
-            class="cursor-pointer group bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative flex flex-col min-h-[420px]">
+            class="cursor-pointer group bg-white rounded-xl shadow-lg overflow-hidden border border-black-200 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 relative flex flex-col min-h-[420px]">
             <!-- Image container above -->
-            <div class="w-full flex-1 min-h-[320px] bg-gray-100 border-b border-gray-200 overflow-hidden relative flex">
-                <img [src]="'https://www.shokuninusa.com/cdn/shop/files/gravity-damascus-gut-hook-hunting-knife-with-exotic-rose-wood-and-bone-handle-498317_98326012-37a7-4ab5-ae07-426b32503736.jpg?v=1711955419'" alt="{{ product.name }}" class="object-cover w-full h-full transition duration-300 group-hover:blur-sm group-hover:brightness-50 flex-1" />
-                <div class="absolute inset-0 flex flex-col justify-center items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <div class="w-full flex-1 min-h-[320px] bg-black-100 border-b border-black-200 overflow-hidden relative flex">
+                <img [src]="product.photoUrl" alt="{{ product.name }}" class="object-cover w-full h-full transition duration-300 group-hover:blur-sm group-hover:brightness-50 flex-1" />
+                <!-- Black overlay on hover -->
+                <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-60 transition-opacity duration-300 z-10"></div>
+                <div class="absolute inset-0 flex flex-col justify-center items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                     <h3 class="text-3xl font-semibold text-white mb-2 group-hover:text-yellow-400 transition">{{ product.name }}</h3>
                     <p class="text-gray-200 mb-2 text-center">{{ product.description }}</p>
                     <div class="flex flex-wrap gap-2 text-xs text-gray-200 mb-2 justify-center">
